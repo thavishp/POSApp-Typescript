@@ -9,8 +9,11 @@ import {
 } from 'native-base';
 import React from 'react';
 import {SafeAreaView, TouchableOpacity} from 'react-native';
+const Home = () => {
+  const context = useContext(AppContext);
+  const charges = context.charges;
+  const setCharges = context.setCharges;
 
-const Home = ({navigation}: any) => {
   return (
     <Box
       width="100%"

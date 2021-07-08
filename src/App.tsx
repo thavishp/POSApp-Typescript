@@ -6,30 +6,41 @@ import {NativeBaseProvider} from 'native-base';
 import {Button} from 'react-native';
 import Home from './components/Home';
 import Items from './components/Items';
+import AppContext from './AppContext';
 
 const Stack = createStackNavigator();
 
 const App = () => {
+  const [charges, setCharges]: [Array<{name: string; price: number}>, any] =
+    React.useState([]);
+
+  const chargesContext = {
+    charges: charges,
+    setCharges: setCharges,
+  };
+
   return (
-    <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerRight: () => (
-                <Button
-                  onPress={() => console.log('This is a button!')}
-                  title="Items"
-                />
-              ),
-            }}
-          />
-          <Stack.Screen name="Items" component={Items} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </NativeBaseProvider>
+    <AppContext.Provider value={chargesContext}>
+      <NativeBaseProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={({navigation}) => ({
+                headerRight: () => (
+                  <Button
+                    onPress={() => navigation.navigate('Items')}
+                    title="Items"
+                  />
+                ),
+              })}
+            />
+            <Stack.Screen name="Items" component={Items} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </NativeBaseProvider>
+    </AppContext.Provider>
   );
 };
 export default App;
