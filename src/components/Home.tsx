@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {Box, Center, Text, Button, Modal, useToast} from 'native-base';
 import NumPad from './NumPad';
+import CartModal from './CartModal';
 import AppContext from '../AppContext';
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
   const charges = context.charges;
   const setCharges = context.setCharges;
 
+  const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('0.00');
 
   const toast = useToast();
@@ -48,9 +50,10 @@ const Home = () => {
       justifyContent="flex-end"
       pt={5}
       safeAreaBottom>
+      <CartModal showModal={showModal} setShowModal={setShowModal} />
       <Box flex={1} width="100%" px={10} justifyContent="flex-start">
-        <Button size="md" onPress={() => navigation.navigate('Items')}>
-          Items List
+        <Button size="md" onPress={() => setShowModal(true)}>
+          Show Cart
         </Button>
         <Box justifyContent="flex-end" flex={1} py={5} alignItems="center">
           <Center
