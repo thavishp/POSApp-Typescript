@@ -1,10 +1,20 @@
 import React, {useContext, useState} from 'react';
-import {Box, Center, Text, Button, Modal, useToast} from 'native-base';
+import {
+  Box,
+  Center,
+  Text,
+  Button,
+  Modal,
+  useToast,
+  HStack,
+  VStack,
+} from 'native-base';
 import NumPad from './NumPad';
 import CartModal from './CartModal';
 import AppContext from '../AppContext';
+import {useIsFocused} from '@react-navigation/native';
 
-const Home = () => {
+const Home = ({navigation}: any) => {
   const context = useContext(AppContext);
   const charges = context.charges;
   const setCharges = context.setCharges;
@@ -13,6 +23,7 @@ const Home = () => {
   const [text, setText] = useState('0.00');
 
   const toast = useToast();
+  const isFocused = useIsFocused();
 
   const buttonPressed = (inputChar: string): void => {
     if (inputChar === 'C') {
@@ -35,7 +46,7 @@ const Home = () => {
     } else if (text != '0.00') {
       toast.show({
         status: 'error',
-        description: 'Please enter a valid number',
+        description: 'Please enter a valid price',
         placement: 'top',
       });
     }
@@ -55,23 +66,38 @@ const Home = () => {
       pt={5}
       safeAreaBottom>
       <CartModal showModal={showModal} setShowModal={setShowModal} />
-      <Box flex={1} width="100%" px={10} justifyContent="flex-start">
-        <Button size="md" onPress={() => setShowModal(true)}>
-          Show Cart
-        </Button>
-        <Box justifyContent="flex-end" flex={1} py={5} alignItems="center">
+      <Box flex={1} width="100%" px={10}>
+        <VStack justifyContent="space-between" flex={1} pb={3}>
           <Center
             rounded="lg"
             border={1}
-            borderColor="primary.500"
+            borderColor="darkText"
             width="100%"
             height={10}>
-            <Text color="primary.500">Charge: ${total}</Text>
+            <Text color="darkText">Charge: ${total}</Text>
           </Center>
-          <Text alignSelf="flex-end" pt={5}>
+
+          <HStack width="100%" justifyContent="space-around">
+            <Button
+              size="lg"
+              onPress={() => setShowModal(true)}
+              bg="rgb(52, 152, 219)"
+              _text={{color: 'lightText'}}>
+              View Cart
+            </Button>
+            <Button
+              size="lg"
+              onPress={() => navigation.navigate('Items')}
+              bg="rgb(52, 152, 219)"
+              _text={{color: 'lightText'}}>
+              Saved Items
+            </Button>
+          </HStack>
+
+          <Text alignSelf="flex-end" pt={5} color="darkText" bold>
             {text} CAD
           </Text>
-        </Box>
+        </VStack>
       </Box>
       <NumPad buttonPressed={buttonPressed} submit={submitItem} />
     </Box>

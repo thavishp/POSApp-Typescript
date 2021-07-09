@@ -22,7 +22,6 @@ const CartModal = ({showModal, setShowModal}: any) => {
         prev[index].quantity -= 1;
         return prev;
       });
-      console.log('decrementItem');
     }
     forceUpdate({});
   };
@@ -32,7 +31,6 @@ const CartModal = ({showModal, setShowModal}: any) => {
       prev[index].quantity += 1;
       return prev;
     });
-    console.log('incrementItem');
     forceUpdate({});
   };
 
@@ -49,13 +47,17 @@ const CartModal = ({showModal, setShowModal}: any) => {
           </Text>
           <Text fontSize={15}>${item.price.toFixed(2)}</Text>
         </VStack>
-        <HStack space={3} alignItems="center">
-          <TouchableOpacity onPress={() => decrementItem(index)}>
-            <Text fontSize={25}>-</Text>
+        <HStack space={10} alignItems="center">
+          <TouchableOpacity
+            onPress={() => decrementItem(index)}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}>
+            <Text fontSize={40}>-</Text>
           </TouchableOpacity>
           <Text fontSize={20}>{item.quantity}</Text>
-          <TouchableOpacity onPress={() => incrementItem(index)}>
-            <Text fontSize={25}>+</Text>
+          <TouchableOpacity
+            onPress={() => incrementItem(index)}
+            hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}>
+            <Text fontSize={40}>+</Text>
           </TouchableOpacity>
         </HStack>
       </HStack>

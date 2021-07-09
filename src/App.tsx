@@ -27,16 +27,13 @@ const App = () => {
             <Stack.Screen
               name="Home"
               component={Home}
-              options={({navigation}) => ({
-                headerRight: () => (
-                  <Button
-                    onPress={() => navigation.navigate('Items')}
-                    title="Items"
-                  />
-                ),
-              })}
+              options={{title: 'Checkout'}}
             />
-            <Stack.Screen name="Items" component={Items} />
+            <Stack.Screen
+              name="Items"
+              component={Items}
+              options={{headerBackTitle: 'Back'}}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </NativeBaseProvider>
