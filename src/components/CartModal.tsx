@@ -11,7 +11,9 @@ const CartModal = ({showModal, setShowModal}: any) => {
     <Box key={index}>
       <HStack space={3} justifyContent="space-between">
         <Text>{item.name == '_item' ? 'Item ' + (index + 1) : item.name}</Text>
-        <Text>{item.price.toFixed(2)}</Text>
+        <Text>
+          ${item.price.toFixed(2)} x {item.quantity}
+        </Text>
       </HStack>
     </Box>
   ));

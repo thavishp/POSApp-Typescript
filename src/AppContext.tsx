@@ -1,7 +1,8 @@
 import React from 'react';
+import {Charge} from './types';
 
 const initialContext: {
-  charges: Array<{name: string; price: number}>;
+  charges: Array<Charge>;
   setCharges: any;
 } = {charges: [], setCharges: ''};
 

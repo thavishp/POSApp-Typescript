@@ -29,7 +29,9 @@ const Home = () => {
   const submitItem = () => {
     // Take raw item value
     if (/^\d+(.\d{1,2})?$/.test(text) && text != '0.00') {
-      setCharges(charges.concat([{name: '_item', price: Number(text)}]));
+      setCharges(
+        charges.concat([{name: '_item', price: Number(text), quantity: 1}]),
+      );
     } else if (text != '0.00') {
       toast.show({
         status: 'error',
@@ -40,7 +42,9 @@ const Home = () => {
     setText('0.00');
   };
 
-  const total = charges.reduce((acc, item) => acc + item.price, 0).toFixed(2);
+  const total = charges
+    .reduce((acc, item) => acc + item.price * item.quantity, 0)
+    .toFixed(2);
 
   return (
     <Box

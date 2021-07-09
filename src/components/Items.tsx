@@ -9,7 +9,18 @@ const Items = () => {
   const setCharges = context.setCharges;
 
   const addItem = (item: {name: string; price: number}) => {
-    setCharges(charges.concat([item]));
+    const index = charges.findIndex(charge => {
+      if (charge.name == item.name) {
+        return true;
+      }
+    });
+
+    if (index == -1) {
+      setCharges(charges.concat([Object.assign(item, {quantity: 1})]));
+    } else {
+      charges[index].quantity += 1;
+      setCharges(charges);
+    }
   };
 
   const listItems = [

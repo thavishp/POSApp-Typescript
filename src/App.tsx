@@ -7,12 +7,12 @@ import {Button} from 'react-native';
 import Home from './components/Home';
 import Items from './components/Items';
 import AppContext from './AppContext';
+import {Charge} from './types';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  const [charges, setCharges]: [Array<{name: string; price: number}>, any] =
-    React.useState([]);
+  const [charges, setCharges]: [Array<Charge>, any] = React.useState([]);
 
   const chargesContext = {
     charges: charges,
