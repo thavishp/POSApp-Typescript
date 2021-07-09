@@ -16,6 +16,7 @@ const Items = () => {
   const charges = context.charges;
   const setCharges = context.setCharges;
 
+  // TODO: initialize items from permanent storage
   const [items, setItems] = useState([
     {name: 'Banana', price: 1},
     {name: 'Apple', price: 2},
@@ -38,6 +39,7 @@ const Items = () => {
   };
 
   const newItem = () => {
+    //TODO: adding new items
     console.log('added new item');
   };
 
@@ -59,6 +61,7 @@ const Items = () => {
           <TouchableOpacity onPress={() => addItem(item)}>
             <AddIcon color="green.500" />
           </TouchableOpacity>
+          {/* TODO: removing items */}
           <TouchableOpacity onPress={() => console.log('delete item')}>
             <CloseIcon color="red.500" />
           </TouchableOpacity>

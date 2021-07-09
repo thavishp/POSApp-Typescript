@@ -74,6 +74,7 @@ const Home = ({navigation}: any) => {
             borderColor="darkText"
             width="100%"
             height={10}>
+            {/* TODO: add checkout ability */}
             <Text color="darkText">Charge: ${total}</Text>
           </Center>
 
