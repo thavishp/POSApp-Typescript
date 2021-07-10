@@ -7,21 +7,20 @@ import {
   Button,
   CloseIcon,
 } from 'native-base';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import AppContext from '../AppContext';
+import NewItemModal from './NewItemModal';
 
 const Items = () => {
-  const context = useContext(AppContext);
-  const charges = context.charges;
-  const setCharges = context.setCharges;
+  const {charges, setCharges, items, setItems} = useContext(AppContext);
 
-  // TODO: initialize items from permanent storage
-  const [items, setItems] = useState([
-    {name: 'Banana', price: 1},
-    {name: 'Apple', price: 2},
-    {name: 'Mango', price: 3},
-  ]);
+  const [showModal, setShowModal] = useState(false);
+  const [, forceUpdate] = React.useState({});
+
+  useEffect(() => {
+    console.log('refreshed');
+  });
 
   const addItem = (item: {name: string; price: number}) => {
     const index = charges.findIndex(charge => {
@@ -38,9 +37,12 @@ const Items = () => {
     }
   };
 
-  const newItem = () => {
-    //TODO: adding new items
-    console.log('added new item');
+  const deleteItem = (index: number) => {
+    setItems((prev: any) => {
+      prev.splice(index, 1);
+      return prev;
+    });
+    forceUpdate({});
   };
 
   const listItems = items.map((item, index) => (
@@ -61,8 +63,7 @@ const Items = () => {
           <TouchableOpacity onPress={() => addItem(item)}>
             <AddIcon color="green.500" />
           </TouchableOpacity>
-          {/* TODO: removing items */}
-          <TouchableOpacity onPress={() => console.log('delete item')}>
+          <TouchableOpacity onPress={() => deleteItem(index)}>
             <CloseIcon color="red.500" />
           </TouchableOpacity>
         </HStack>
@@ -77,14 +78,19 @@ const Items = () => {
       // alignItems="center"
       justifyContent="flex-start"
       safeAreaBottom>
+      <NewItemModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        setItems={setItems}
+      />
       <VStack justifyContent="center">{listItems}</VStack>
       <Box justifyContent="flex-end" flex={1} py={5} alignItems="center">
         <Button
           size="md"
-          onPress={() => newItem()}
+          onPress={() => setShowModal(true)}
           bg="rgb(52, 152, 219)"
           _text={{color: 'lightText'}}>
-          Add Item
+          New Item
         </Button>
       </Box>
     </Box>

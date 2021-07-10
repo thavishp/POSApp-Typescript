@@ -14,13 +14,22 @@ const Stack = createStackNavigator();
 const App = () => {
   const [charges, setCharges]: [Array<Charge>, any] = React.useState([]);
 
-  const chargesContext = {
+  // TODO: initialize items from permanent storage
+  const [items, setItems] = React.useState([
+    {name: 'Banana', price: 1},
+    {name: 'Apple', price: 2},
+    {name: 'Mango', price: 3},
+  ]);
+
+  const globalContext = {
     charges: charges,
     setCharges: setCharges,
+    items: items,
+    setItems: setItems,
   };
 
   return (
-    <AppContext.Provider value={chargesContext}>
+    <AppContext.Provider value={globalContext}>
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator>

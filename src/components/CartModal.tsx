@@ -5,9 +5,7 @@ import {TouchableOpacity} from 'react-native';
 import {Charge} from '../types';
 
 const CartModal = ({showModal, setShowModal}: any) => {
-  const context = useContext(AppContext);
-  const charges = context.charges;
-  const setCharges = context.setCharges;
+  const {charges, setCharges} = useContext(AppContext);
   const [, forceUpdate] = React.useState({});
 
   const decrementItem = (index: number) => {

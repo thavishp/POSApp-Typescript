@@ -15,9 +15,7 @@ import AppContext from '../AppContext';
 import {useIsFocused} from '@react-navigation/native';
 
 const Home = ({navigation}: any) => {
-  const context = useContext(AppContext);
-  const charges = context.charges;
-  const setCharges = context.setCharges;
+  const {charges, setCharges} = useContext(AppContext);
 
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState('0.00');
