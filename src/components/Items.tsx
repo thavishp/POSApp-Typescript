@@ -18,10 +18,6 @@ const Items = () => {
   const [showModal, setShowModal] = useState(false);
   const [, forceUpdate] = React.useState({});
 
-  useEffect(() => {
-    console.log('refreshed');
-  });
-
   const addItem = (item: {name: string; price: number}) => {
     const index = charges.findIndex(charge => {
       if (charge.name == item.name) {
