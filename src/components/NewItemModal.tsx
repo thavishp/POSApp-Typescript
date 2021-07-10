@@ -12,6 +12,8 @@ const NewItemModal = ({showModal, setShowModal, setItems}: any) => {
       setItems((prev: any) =>
         prev.concat([{name: itemName, price: Number(itemPrice)}]),
       );
+      setItemName('');
+      setItemPrice('');
       setShowModal(false);
     } else {
       toast.show({
