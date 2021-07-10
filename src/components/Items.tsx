@@ -7,7 +7,7 @@ import {
   Button,
   CloseIcon,
 } from 'native-base';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import AppContext from '../AppContext';
 import NewItemModal from './NewItemModal';

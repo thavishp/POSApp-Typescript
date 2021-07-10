@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext} from 'react';
 import {Box, Button, HStack, Modal, Text, VStack} from 'native-base';
 import AppContext from '../AppContext';
 import {TouchableOpacity} from 'react-native';

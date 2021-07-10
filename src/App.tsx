@@ -3,7 +3,6 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NativeBaseProvider} from 'native-base';
-import {Button} from 'react-native';
 import Home from './components/Home';
 import Items from './components/Items';
 import AppContext from './AppContext';
