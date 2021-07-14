@@ -6,7 +6,7 @@ import {NativeBaseProvider} from 'native-base';
 import Home from './components/Home';
 import Items from './components/Items';
 import AppContext from './AppContext';
-import {Charge} from './types';
+import {Charge, Item} from './types';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +14,7 @@ const App = () => {
   const [charges, setCharges]: [Array<Charge>, any] = React.useState([]);
 
   // TODO: initialize items from permanent storage
-  const [items, setItems] = React.useState([
+  const [items, setItems]: [Array<Item>, any] = React.useState([
     {name: 'Banana', price: 1},
     {name: 'Apple', price: 2},
     {name: 'Mango', price: 3},

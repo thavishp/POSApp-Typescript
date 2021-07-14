@@ -3,3 +3,8 @@ export type Charge = {
   price: number;
   quantity: number;
 };
+
+export type Item = {
+  name: string;
+  price: number;
+};

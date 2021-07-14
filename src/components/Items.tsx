@@ -10,6 +10,7 @@ import {
 import React, {useContext, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import AppContext from '../AppContext';
+import {Item} from '../types';
 import NewItemModal from './NewItemModal';
 
 const Items = () => {
@@ -18,7 +19,7 @@ const Items = () => {
   const [showModal, setShowModal] = useState(false);
   const [, forceUpdate] = React.useState({});
 
-  const addItem = (item: {name: string; price: number}) => {
+  const addItem = (item: Item) => {
     const index = charges.findIndex(charge => {
       if (charge.name == item.name) {
         return true;
