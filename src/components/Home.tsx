@@ -8,6 +8,7 @@ import {
   useToast,
   HStack,
   VStack,
+  Circle,
 } from 'native-base';
 import NumPad from './NumPad';
 import CartModal from './CartModal';
@@ -55,6 +56,8 @@ const Home = ({navigation}: any) => {
     .reduce((acc, item) => acc + item.price * item.quantity, 0)
     .toFixed(2);
 
+  const itemCount = charges.reduce((acc, item) => acc + item.quantity, 0);
+
   return (
     <Box
       width="100%"
@@ -73,16 +76,25 @@ const Home = ({navigation}: any) => {
             width="100%"
             height={10}>
             {/* TODO: add checkout ability */}
-            <Text color="darkText">Charge: ${total}</Text>
+            <Text color="darkText">Total: ${total}</Text>
           </Center>
 
-          <HStack width="100%" justifyContent="space-around">
+          <HStack width="100%" justifyContent="space-around" space={3}>
             <Button
               size="lg"
               onPress={() => setShowModal(true)}
               bg="rgb(52, 152, 219)"
-              _text={{color: 'lightText'}}>
-              View Cart
+              _text={{color: 'lightText'}}
+              alignItems="center"
+              justifyContent="center">
+              <HStack space={2} alignItems="center">
+                <Text color="lightText" fontSize={17} bold>
+                  View Cart
+                </Text>
+                <Circle size={6} bg="rgb(231, 76, 60)" m={0}>
+                  <Text color="lightText">{itemCount}</Text>
+                </Circle>
+              </HStack>
             </Button>
             <Button
               size="lg"

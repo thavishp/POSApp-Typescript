@@ -6,6 +6,8 @@ import {
   VStack,
   Button,
   CloseIcon,
+  Center,
+  Circle,
 } from 'native-base';
 import React, {useContext, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
@@ -32,6 +34,7 @@ const Items = () => {
       charges[index].quantity += 1;
       setCharges(charges);
     }
+    forceUpdate({});
   };
 
   const deleteItem = (index: number) => {
@@ -41,6 +44,8 @@ const Items = () => {
     });
     forceUpdate({});
   };
+
+  const itemCount = charges.reduce((acc, charge) => acc + charge.quantity, 0);
 
   const listItems = items.map((item, index) => (
     <Box key={index} bg="trueGray.50" p={2} m={1} rounded="xl">
@@ -80,6 +85,22 @@ const Items = () => {
         setShowModal={setShowModal}
         setItems={setItems}
       />
+      <Box width="100%" px={10} py={3}>
+        <Center
+          rounded="lg"
+          border={1}
+          borderColor="darkText"
+          width="100%"
+          height={10}>
+          {/* TODO: add checkout ability */}
+          <HStack space={2} alignItems="center">
+            <Text color="darkText">Items in Cart:</Text>
+            <Circle size={6} bg="rgb(231, 76, 60)" m={0}>
+              <Text color="lightText">{itemCount}</Text>
+            </Circle>
+          </HStack>
+        </Center>
+      </Box>
       <VStack justifyContent="center">{listItems}</VStack>
       <Box justifyContent="flex-end" flex={1} py={5} alignItems="center">
         <Button
