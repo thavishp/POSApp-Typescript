@@ -8,7 +8,11 @@ const NewItemModal = ({showModal, setShowModal, setItems}: any) => {
   const toast = useToast();
 
   const createItem = () => {
-    if (/^\d+(.\d{1,2})?$/.test(itemPrice) && itemPrice != '0.00') {
+    if (
+      /^\d+(.\d{1,2})?$/.test(itemPrice) &&
+      itemPrice != '0.00' &&
+      itemName.trim() != ''
+    ) {
       setItems((prev: any) =>
         prev.concat([{name: itemName, price: Number(itemPrice)}]),
       );
@@ -18,7 +22,7 @@ const NewItemModal = ({showModal, setShowModal, setItems}: any) => {
     } else {
       toast.show({
         status: 'error',
-        description: 'Please enter a valid price',
+        description: 'Please enter a valid name and price',
         placement: 'top',
       });
     }
@@ -56,6 +60,7 @@ const NewItemModal = ({showModal, setShowModal, setItems}: any) => {
             mx={3}
             placeholder="Item Price"
             value={itemPrice}
+            keyboardType="numeric"
             onChange={event => setItemPrice(event.nativeEvent.text)}
             _light={{
               placeholderTextColor: 'blueGray.400',
