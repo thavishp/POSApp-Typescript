@@ -15,6 +15,11 @@ import AppContext from '../AppContext';
 import {Item} from '../types';
 import NewItemModal from './NewItemModal';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'CAD',
+});
+
 const Items = () => {
   const {charges, setCharges, items, setItems} = useContext(AppContext);
 
@@ -54,7 +59,7 @@ const Items = () => {
           <Text fontSize={20} color="darkText">
             {item.name == '_item' ? 'Item ' + (index + 1) : item.name}
           </Text>
-          <Text fontSize={15}>${item.price.toFixed(2)}</Text>
+          <Text fontSize={15}>{formatter.format(item.price)}</Text>
         </VStack>
         <HStack
           flex={1}

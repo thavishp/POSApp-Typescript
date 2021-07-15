@@ -15,6 +15,11 @@ import CartModal from './CartModal';
 import AppContext from '../AppContext';
 import {useIsFocused} from '@react-navigation/native';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'CAD',
+});
+
 const Home = ({navigation}: any) => {
   const {charges, setCharges} = useContext(AppContext);
 
@@ -30,10 +35,11 @@ const Home = ({navigation}: any) => {
     } else {
       if (text == '0.00') {
         setText(inputChar);
-      } else {
+      } else if (/^\d+(.\d{0,2})?$/.test(text + inputChar)) {
         setText(text.concat(inputChar));
       }
     }
+    console.log(text);
   };
 
   const submitItem = () => {
@@ -48,6 +54,7 @@ const Home = ({navigation}: any) => {
         description: 'Please enter a valid price',
         placement: 'top',
       });
+      console.log(text);
     }
     setText('0.00');
   };
@@ -76,7 +83,9 @@ const Home = ({navigation}: any) => {
             width="100%"
             height={10}>
             {/* TODO: add checkout ability */}
-            <Text color="darkText">Total: ${total}</Text>
+            <Text color="darkText">
+              Total: {formatter.format(Number(total))}
+            </Text>
           </Center>
 
           <HStack width="100%" justifyContent="space-around" space={3}>
@@ -106,7 +115,8 @@ const Home = ({navigation}: any) => {
           </HStack>
 
           <Text alignSelf="flex-end" pt={5} color="darkText" bold>
-            {text} CAD
+            {/* {Number.isNaN(Number(text)) ? text : formatter.format(Number(text))} */}
+            {formatter.format(Number(text))}
           </Text>
         </VStack>
       </Box>

@@ -4,6 +4,11 @@ import AppContext from '../AppContext';
 import {TouchableOpacity} from 'react-native';
 import {Charge} from '../types';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'CAD',
+});
+
 const CartModal = ({showModal, setShowModal}: any) => {
   const {charges, setCharges} = useContext(AppContext);
   const [, forceUpdate] = React.useState({});
@@ -43,7 +48,7 @@ const CartModal = ({showModal, setShowModal}: any) => {
           <Text fontSize={20}>
             {item.name == '_item' ? 'Item ' + (index + 1) : item.name}
           </Text>
-          <Text fontSize={15}>${item.price.toFixed(2)}</Text>
+          <Text fontSize={15}>{formatter.format(item.price)}</Text>
         </VStack>
         <HStack space={10} alignItems="center">
           <TouchableOpacity
